@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Your Name</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .navigation {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-container a {
+            color: #666;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 400;
+            transition: opacity 0.2s;
+            padding: 5px 0;
+        }
+        
+        .nav-container a:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-container a.active {
+            color: #000;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .nav-container {
+                gap: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-container a {
+                font-size: 1.1em;
+                padding: 8px 0;
+            }
+        }
+        
+        .header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .content {
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .item-number {
+            font-size: 1.1em;
+            color: #999;
+            font-weight: 300;
+            min-width: 30px;
+            flex-shrink: 0;
+        }
+        
+        .item-content p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .item-content h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .item-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .item-content li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 1.05em;
+        }
+        
+        .item-content li:before {
+            content: "•";
+            color: #999;
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight-text {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .highlight-text p {
+            font-size: 1.2em;
+            color: #333;
+            font-style: italic;
+            margin: 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .item-number {
+                min-width: auto;
+            }
+            
+            .highlight-text {
+                padding: 20px;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation fade-in">
+        <div class="nav-container">
+            <a href="index.html">Resume</a>
+            <a href="about.html" class="active">About</a>
+            <a href="blog.html">Blog</a>
+        </div>
+    </nav>
+
+    <header class="header fade-in">
+        <h1>About</h1>
+        <div class="subtitle">The story behind the work</div>
+    </header>
+
+    <main class="content">
+        <section class="section fade-in">
+            <h2 class="section-title">My Story</h2>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                <div class="item-content">
+                    <p>I'm a product designer and developer who believes great products come from understanding both the technical possibilities and human needs. My journey started in front-end development, where I learned to build things that work. But I quickly discovered my passion lay in understanding why we build them in the first place.</p>
+                    
+                    <p>Over the past few years, I've had the privilege of working with teams ranging from early-stage startups to established tech companies. Each experience taught me something new about the delicate balance between user needs, business goals, and technical constraints.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="highlight-text fade-in">
+            <p>"The best products feel inevitable – like they couldn't have been designed any other way. That's the standard I strive for in every project."</p>
+        </div>
+
+        <section class="section fade-in">
+            <h2 class="section-title">What Drives Me</h2>
+            
+            <div class="item">
+                <div class="item-number">02.</div>
+                <div class="item-content">
+                    <h3>Human-Centered Problem Solving</h3>
+                    <p>Every design decision should serve a real human need. I spend time understanding not just what users do, but why they do it. The most elegant solution is often the one that removes friction you didn't even know existed.</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">03.</div>
+                <div class="item-content">
+                    <h3>Cross-Functional Collaboration</h3>
+                    <p>The best products emerge from diverse perspectives working together. My technical background helps me communicate effectively with developers, while my design experience helps translate complex requirements into intuitive experiences.</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">04.</div>
+                <div class="item-content">
+                    <h3>Systems Thinking</h3>
+                    <p>Individual features are important, but they're part of larger systems. I think about how design decisions ripple through entire experiences, and how today's choices enable tomorrow's possibilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">Beyond Work</h2>
+            
+            <div class="item">
+                <div class="item-number">05.</div>
+                <div class="item-content">
+                    <p>When I'm not designing or coding, you'll find me exploring new cities, experimenting with photography, or diving deep into books about psychology and design. I'm fascinated by how small changes in environment or context can dramatically shift behavior and perception.</p>
+                    
+                    <p>I also volunteer with local organizations teaching basic web design to underrepresented communities. There's something magical about watching someone build their first website and realizing they have the power to share their story with the world.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">Let's Connect</h2>
+            
+            <div class="item">
+                <div class="item-number">06.</div>
+                <div class="item-content">
+                    <p>I'm always interested in connecting with fellow designers, developers, and anyone working on problems that matter. Whether you want to discuss a project, share insights about the industry, or just grab coffee, I'd love to hear from you.</p>
+                    
+                    <ul>
+                        <li>Drop me an email at <a href="mailto:your.email@gmail.com" style="color: #0066cc; text-decoration: none;">your.email@gmail.com</a></li>
+                        <li>Connect with me on <a href="https://linkedin.com/in/yourname" style="color: #0066cc; text-decoration: none;">LinkedIn</a></li>
+                        <li>Check out my work on <a href="https://github.com/yourname" style="color: #0066cc; text-decoration: none;">GitHub</a></li>
+                        <li>Read my thoughts on the <a href="blog.html" style="color: #0066cc; text-decoration: none;">blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add staggered animation delays to fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
