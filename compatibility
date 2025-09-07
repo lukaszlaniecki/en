@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions - Łukasz Łaniecki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .navigation {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-container a {
+            color: #666;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 400;
+            transition: opacity 0.2s;
+            padding: 5px 0;
+        }
+        
+        .nav-container a:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-container a.active {
+            color: #000;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .nav-container {
+                gap: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-container a {
+                font-size: 1.1em;
+                padding: 8px 0;
+            }
+        }
+        
+        .header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .content {
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+         
+        .page-title {
+            font-size: 1.4em;
+            font-weight: 300;
+            margin-bottom: 5px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: left;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .contact-info a:hover {
+            color: #004499;
+            text-decoration: underline;
+        }
+        
+        .item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .item-number {
+            font-size: 1.1em;
+            color: #999;
+            font-weight: 300;
+            min-width: 30px;
+            flex-shrink: 0;
+        }
+        
+        .item-content p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        
+        .item-content h3 {
+            font-size: 1.3em;
+            font-weight: 200;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .item-content h2 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .item-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .item-content li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 1.05em;
+        }
+        
+        .item-content li:before {
+            content: "•";
+            color: #999;
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight-text {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .highlight-text p {
+            font-size: 1.2em;
+            color: #333;
+            font-style: italic;
+            margin: 0;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .item-number {
+                min-width: auto;
+            }
+            
+            .highlight-text {
+                padding: 20px;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2 class="page-title">Łukasz Łaniecki</h2>
+    <div class="contact-info">
+            <a href="mailto:llanieckilpw@gmail.com">llanieckilpw@gmail.com</a>
+            <a href="tel:+1234567890">+1 (234) 567-890</a>
+        </div>
+    <nav class="navigation fade-in">
+        <div class="nav-container">
+            <a href="index.html">Narrative</a>
+            <a href="highlights.html">Highlights</a>
+            <a href="solutions.html" class="active">Solutions</a>
+            <a href="more.html">More</a>
+        </div>
+    </nav>
+
+    <header class="header fade-in">
+        <h2 class="section-title">Imagining the possibilities</h2>
+        <div class="subtitle">Thoughts & Ideas: Current and emerging challenges and opportunities (1 min read)</div>
+    </header>
+
+    <main class="content">
+        <section class="section fade-in">
+            <div class="item">
+                <div class="item-content">
+            <h2>Trend: Social Isolation & Loneliness</h2>
+            <h3>Addressing hiring policies and modern work arragements</h3></div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                    <p>While my work with the LinkedIn Poland Women community was impactful, I am now seeking new challenges. After years of remote collaboration, I am eager to contribute my skills in a more direct, human-centered environment where I can engage in face-to-face cooperation and continue building.</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">02.</div>
+                <div class="item-content">
+                    <p>"A generic structure can make even a powerful narrative feel ordinary."</p> 
+                    
+                    <p>For over two decades, I have built a career around a singular core ability: the creative transformation of ideas into tangible, successful outcomes. My professional life has been a dynamic blend of logical rigor and creative intuition, beginning with a long tenure as a legal professional.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="highlight-text fade-in">
+            <p>"I’m a builder and an operator with a track record of transforming a vision into a valuable reality."</p>
+        </div>
+
+        <section class="section fade-in">
+            <div class="item">
+                <div class="item-content">
+            <h2>Trend: AI-Human Relationships</h2>
+            <h3>Addressing the lack of education in children and adults</h3></div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                    <p>While my work with the LinkedIn Poland Women community was impactful, I am now seeking new challenges. After years of remote collaboration, I am eager to contribute my skills in a more direct, human-centered environment where I can engage in face-to-face cooperation and continue building.</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">02.</div>
+                    <p>My mission is to apply my unique blend of creative problem-solving, strategic thinking, and hands-on execution to help a company achieve greater visibility, foster innovation, and operate more effectively. I want to help you identify emerging trends and new audiences, create new and impactful initiatives, and solve operational problems in fresh, unconventional ways.</p>
+                </div>
+            </div>
+            <section class="section fade-in">
+            <div class="item">
+                <div class="item-content">
+            <h2>Trend: Information Overload, Truth and AI</h2>
+            <h3>Addressing the lack of education in children and adults</h3></div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                    <p>While my work with the LinkedIn Poland Women community was impactful, I am now seeking new challenges. After years of remote collaboration, I am eager to contribute my skills in a more direct, human-centered environment where I can engage in face-to-face cooperation and continue building.</p>
+                </div>
+            </div>
+                <section class="section fade-in">
+            <div class="item">
+                <div class="item-content">
+            <h2>Trend: Forced Career Change</h2>
+            <h3>Addressing fears, uncertainty, doomerism and navigating change</h3></div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                    <p>While my work with the LinkedIn Poland Women community was impactful, I am now seeking new challenges. After years of remote collaboration, I am eager to contribute my skills in a more direct, human-centered environment where I can engage in face-to-face cooperation and continue building.</p>
+                </div>
+            </div>
+                    <section class="section fade-in">
+            <div class="item">
+                <div class="item-content">
+            <h2>Trend: Career Uncertainty in Young People</h2>
+            <h3>Addressing the lack of education and offering real support</h3></div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                    <p>While my work with the LinkedIn Poland Women community was impactful, I am now seeking new challenges. After years of remote collaboration, I am eager to contribute my skills in a more direct, human-centered environment where I can engage in face-to-face cooperation and continue building.</p>
+                </div>
+            </div>
+                    <section class="section fade-in">
+            <div class="item">
+                <div class="item-content">
+            <h2>Trend: Rapidly Growing Influence of Technology</h2>
+            <h3>Addressing the emotional disconnect and lack of education</h3></div>
+            </div>
+            
+            <div class="item">
+                <div class="item-number">01.</div>
+                    <p>While my work with the LinkedIn Poland Women community was impactful, I am now seeking new challenges. After years of remote collaboration, I am eager to contribute my skills in a more direct, human-centered environment where I can engage in face-to-face cooperation and continue building.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section fade-in">
+            <h2 class="section-title">Skills & Passions</h2>
+            
+            <div class="item">
+                <div class="item-number">02.</div>
+                <div class="item-content">
+                    <ul>
+                        <li>Creative problem-solving</li>
+                        <li>Unconventional thinking & perspective shift</li>
+                        <li>Project management</li>
+                        <li>Effective communication & public speaking</li>
+                        <li>Strategic writing & content creation</li>
+                        <li>Graphic design & photography</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">Let's Connect</h2>
+            
+            <div class="item">
+                <div class="item-number">06.</div>
+                <div class="item-content">
+                    <p>I’m always interested in connecting with fellow builders and creative thinkers. Whether you want to discuss a project, share insights about an industry, or just grab a coffee, I'd love to hear from you.</p>
+                    
+                    <ul>
+                        <li>Drop me an email at <a href="mailto:your.email@gmail.com" style="color: #0066cc; text-decoration: none;">your.email@gmail.com</a></li>
+                        <li>Check out my work on <a href="https://github.com/yourname" style="color: #0066cc; text-decoration: none;">GitHub</a></li>
+                        <li>Read my thoughts on the <a href="blog.html" style="color: #0066cc; text-decoration: none;">blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Add staggered animation delays to fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
