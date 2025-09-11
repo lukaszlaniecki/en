@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategy first. Part four. - Łukasz Łaniecki</title>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: left;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .contact-info a:hover {
+            color: #004499;
+            text-decoration: underline;
+        }
+         
+        .page-title {
+            font-size: 1.4em;
+            font-weight: 300;
+            margin-bottom: 5px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            line-height: 1.1;
+        }
+        
+        .navigation {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-container a {
+            color: #666;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 400;
+            transition: opacity 0.2s;
+            padding: 5px 0;
+        }
+        
+        .nav-container a:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-container a.active {
+            color: #000;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .nav-container {
+                gap: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-container a {
+                font-size: 1.1em;
+                padding: 8px 0;
+            }
+        }
+        
+        .top-link {
+            margin-bottom: 30px;
+        }
+        
+        .top-link a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: opacity 0.2s;
+        }
+        
+        .top-link a:hover {
+            opacity: 0.7;
+        }
+        
+        .back-link {
+            margin-bottom: 30px;
+        }
+        
+        .back-link a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: opacity 0.2s;
+        }
+        
+        .back-link a:hover {
+            opacity: 0.7;
+        }
+        
+        .article-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .article-header h1 {
+            font-size: 2.2em;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #000;
+            line-height: 1.3;
+        }
+        
+        .article-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #f5f5f5;
+            color: #666;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        
+        .article-content {
+            margin: 0 auto;
+        }
+        
+        .article-content h2 {
+            font-size: 1.6em;
+            font-weight: 500;
+            margin: 40px 0 20px 0;
+            color: #000;
+        }
+        
+        .article-content h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            margin: 30px 0 15px 0;
+            color: #000;
+        }
+        
+        .article-content p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            color: #555;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .article-content blockquote {
+            background: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px 25px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #444;
+        }
+        
+        .article-content code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: #d73a49;
+        }
+        
+        .article-content pre {
+            background: #f6f8fa;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            color: #333;
+        }
+        
+        .article-footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .article-footer p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .article-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tags {
+                justify-content: flex-start;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .conversation-entry {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+
+        .speaker-label {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .gemini-label {
+            color: #0066cc;
+        }
+
+        .conversation-content {
+            color: #555;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+
+        .conversation-content strong {
+            color: #333;
+        }
+
+        .key-insight {
+            background: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 20px 25px;
+            margin: 30px 0;
+            font-style: italic;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="page-title">Łukasz Łaniecki - Excited for new opportunities</h2>
+    <div class="contact-info">
+            <a href="mailto:llanieckilpw@gmail.com">llanieckilpw@gmail.com</a>
+            <a href="tel:+1234567890">+1 (234) 567-890</a>
+        </div>
+    <nav class="navigation fade-in">
+        <div class="nav-container">
+            <a href="index.html">Introduction</a>
+            <a href="howiwork.html">How I Work</a>
+            <a href="onmyradar.html">On My Radar</a>
+            <a href="letsconnect.html">Let's Connect</a>
+            <a href="behindthescenes.html" class="active">Behind The Scenes</a>
+        </div>
+    </nav>
+
+    <div class="back-link fade-in">
+        <a href="behindthescenes.html">← Back</a>
+    </div>
+
+    <header class="article-header fade-in">
+        <h1>Strategy first. Part four.</h1>
+        <div class="article-meta">September 2, 2025 · 5 min read</div>
+        </div>
+    </header>
+
+    <article class="article-content fade-in">
+        <div class="article-content">
+            
+        <div class="conversation-entry">
+            <div class="speaker-label">Me:</div>
+            <div class="conversation-content">
+                <p>What else, before we tackle the next steps in this process? Let's think harder maybe. Is there something we might have overlooked? And what would you suggest as the next thing to discuss in detail?</p>
+            </div>
+        </div>
+            
+        <div class="conversation-entry">
+            <div class="speaker-label gemini-label">Gemini:</div>
+            <div class="conversation-content">
+                <p>That's a smart question. It shows you're not just rushing forward, but are committed to a solid foundation. After our extensive discussion, it seems we have covered the key mental and emotional aspects, but we've overlooked two very practical pillars that can make or break a successful transition.</p>
+
+                <h3>The Financial Runway</h3>
+                <p>The emotional and psychological strain of a career change is often intensified by financial uncertainty. Before fully committing to this journey, it's vital to create a financial runway—a clear plan for how you'll support yourself during the transition.</p>
+
+                <p>This isn't about having a massive savings account, but about having a realistic budget and a timeline. Will you need to work a part-time job? Can you cut expenses? A clear financial strategy will reduce stress and allow you to make decisions from a place of security rather than desperation. It gives you the freedom to pursue the right opportunity, not just the first one that comes along.</p>
+
+                <h3>The Personal Narrative</h3>
+                <p>We've talked a lot about your "why" and what you have to offer, but we haven't discussed how to package it all into a compelling personal narrative. Your new role or career path is not just a list of skills; it's a story.</p>
+
+                <p>You need to be able to tell that story concisely and confidently to everyone you meet—from a networking contact to a potential employer. You need to connect your past experiences to your future goals in a way that makes sense to them. The more you can practice and perfect this narrative, the more convincing you'll be, and the more you'll convince yourself. This story is the bridge between your internal work and your external presentation.</p>
+
+                <p>With the foundation of these three pillars—the mental and emotional work, the financial runway, and your personal narrative—you'll be more than ready for the next phase.</p>
+
+                <p>I suggest we discuss the practical execution of your proactive job search. This would include crafting your pitch, resume, and LinkedIn profile to reflect all the work we've done so far. How does that sound?</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label">Me:</div>
+            <div class="conversation-content">
+                <p>Yes, the money part is of course also something we need to focus on in this process. A clear plan for this is a must have. Also, something which could serve as our plan B, because we never know, and our plans are only plans - unexpected things can always happen, and it's smart to at least have some idea as to what our alternative might be.</p>
+
+                <p>Or even some kind of mental frame just in case - our clear plan (plan A) has just been ruined (this happens), and then what? Can I think of ways I could support myself (plus other people who rely on me) in case my plan A doesn't pan out? I've heard stories where people had their savings, thought that these were the solution to this, and then... life happened.</p>
+
+                <p>So I think this realization will help immensely - from the outset you will take into account that your plan (any plan) is not a guarantee of a certain reality down the road.</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label gemini-label">Gemini:</div>
+            <div class="conversation-content">
+                <p>That's an incredibly important and often overlooked point. You're thinking like a seasoned risk manager. Relying on a single plan, no matter how well-thought-out, can create a false sense of security. Recognizing from the outset that your plans are not guarantees of a future reality is a truly mature and resilient approach.</p>
+
+                <p>Having a Plan B isn't about expecting failure; it's about giving yourself a powerful tool to navigate the unexpected. It's the difference between feeling panicked when things go wrong and feeling in control. A Plan B significantly reduces the mental and emotional burden of the unknown.</p>
+
+                <h3>Creating Your Plan B</h3>
+                <p>Here are some concrete ideas for what a financial Plan B could look like:</p>
+
+                <p><strong>The Stepping-Stone Role.</strong> If your ideal role is a senior-level position in a new industry, a Plan B could be taking a lower-level job to get in the door. You're still moving forward, just on a different path.</p>
+
+                <p><strong>The Bridge Job.</strong> This is a job that is perhaps less fulfilling but provides immediate income and stability. It could be part-time or a contract role that allows you to continue your search without the crushing pressure of an empty bank account.</p>
+
+                <p><strong>Freelancing and Consulting.</strong> You may be able to leverage your existing skills on a freelance basis. This is a powerful way to generate income while actively proving your value and building your network in a new field.</p>
+
+                <p>By having a clear alternative, you empower yourself to make smart choices without the fear of your "only plan" falling apart. It's a key part of the confidence you need to take on something big and unconventional.</p>
+
+                <p>With your financial runway and contingency plan in place, you have now built a rock-solid foundation. Let's move on to the practical execution of your job search. What do you think about discussing how to craft your personal narrative, pitch, and resume to reflect all the work we've done so far?</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label">Me:</div>
+            <div class="conversation-content">
+                <p>Great idea! Let's do it.</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label gemini-label">Gemini:</div>
+            <div class="conversation-content">
+                <p>Let's get into the practical application. You've done the essential foundational work, and now it's time to build the tools that will communicate your value to the world.</p>
+
+                <h3>Crafting Your Personal Narrative</h3>
+                <p>This is the central story that connects your past to your future. It's the answer to the question, "Why are you making this change now?" A good narrative is clear, confident, and inspiring. It should show that your career change is a natural evolution, not a desperate leap.</p>
+
+                <p>Think of your story as a three-act play:</p>
+
+                <p><strong>Act 1: The Past.</strong> Briefly describe your previous career and your core expertise. Focus on skills that are relevant to your new path (e.g., problem-solving, project management, leadership). The goal is to show what you're bringing with you.</p>
+
+                <p><strong>Act 2: The Pivot.</strong> Explain the "why." This is where you address your motivations—the desire for greater impact, a new challenge, or a better work-life balance. It's the moment you realized your skills could be applied in a more fulfilling way.</p>
+
+                <p><strong>Act 3: The Future.</strong> Describe what you're looking for and the value you're prepared to create. This is where you connect your unique experiences to the specific industry or role you're targeting.</p>
+
+                <p>Practice telling this story concisely. It should feel authentic and be delivered with confidence.</p>
+
+                <h3>Building Your Proactive Pitch</h3>
+                <p>Your pitch is the core of your proactive job search. It's a short, powerful message designed to open a conversation, not secure a job. It should be used for networking emails, LinkedIn messages, and even informational interviews.</p>
+
+                <p>Follow a clear, problem-solution format:</p>
+
+                <p><strong>The Hook:</strong> Start with a compliment or a shared connection to get their attention. "I've been following your company's recent work on [Project], and I'm very impressed with..."</p>
+
+                <p><strong>The Problem:</strong> Identify a specific challenge or opportunity you've spotted. "In my previous work, I saw firsthand how a lack of [Process] can lead to [Problem]. It's a common blind spot in the industry."</p>
+
+                <p><strong>The Solution:</strong> Propose a new way of thinking about the problem and how you could help. This is where you introduce the idea of a new role. "I've developed a framework for addressing this, and I believe a new role focused on [Your Unique Role Title] could significantly improve [Business Outcome]."</p>
+
+                <p><strong>The Ask:</strong> Make a low-stakes request, like a brief meeting. "I would love to get your thoughts on my ideas. Would you be open to a 15-minute chat sometime next week?"</p>
+
+                <p>This pitch transforms you from an applicant into a consultant.</p>
+
+                <h3>Optimizing Your Resume and LinkedIn Profile</h3>
+                <p>Your resume and LinkedIn profile are not historical documents; they are marketing tools for your new direction. They must clearly communicate your personal narrative and proactive approach.</p>
+
+                <p><strong>Lead with Your Story:</strong> On LinkedIn, use your headline to signal your change. Instead of "Former Project Manager at X," try "Project Manager pivoting to [New Field] | Focused on [Your Value Proposition]." Your summary should be a concise version of your personal narrative.</p>
+
+                <p><strong>Translate, Don't Just List:</strong> For your resume, don't just list your old job duties. Translate your transferable skills and accomplishments into the language of your target industry. For example, "managed a budget" becomes "oversaw fiscal operations," and "organized events" becomes "managed logistics for client-facing projects."</p>
+
+                <p><strong>Highlight Your Superpowers:</strong> Use your experience section to highlight achievements that showcase the "superpowers" we discussed, such as resilience, problem-solving, and a unique perspective. Use a clear, impact-focused format (e.g., "Led a project that reduced costs by 15% in 6 months").</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label">Me:</div>
+            <div class="conversation-content">
+                <p>I love both, the PPF (Past/Pivot/Future) framework, and this HPSA problem-solution format (Hook/Problem/Solution/Ask)! It's well thought out, and makes so much sense to me.</p>
+
+                <p>Hey, before we dive into that, what if I don't want to join LinkedIn? What are my options?</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label gemini-label">Gemini:</div>
+            <div class="conversation-content">
+                <p>That's an excellent and very practical question. While LinkedIn is a powerful tool, it's certainly not a requirement, and there are many effective ways to navigate your career transition without it. Not wanting to join LinkedIn actually reinforces the need for the proactive, hands-on strategy we've built.</p>
+
+                <p>Here are your options for building a professional brand and a network without a LinkedIn profile:</p>
+
+                <h3>1. The Personal Professional Website or Portfolio</h3>
+                <p>This is the best and most direct replacement for LinkedIn. It gives you complete control over your narrative and a professional home on the web.</p>
+
+                <p>What to include:</p>
+
+                <ul>
+                    <li>A compelling "About" page that tells your personal narrative (PPF).</li>
+                    <li>A page dedicated to your skills, with specific examples of your work and how you've applied your superpowers.</li>
+                    <li>A portfolio of your projects, case studies, or even a blog where you write about your ideas.</li>
+                    <li>A clear "Contact" page.</li>
+                </ul>
+
+                <p>Benefit: You own the space. There are no algorithms or ads, and you can present yourself exactly as you want to be seen.</p>
+
+                <h3>2. Targeted Email and Direct Messaging</h3>
+                <p>Your proactive pitch (HPSA format) is designed for this exact purpose. You can find professional contact information through a company's website, an industry database, or by asking for an introduction from a mutual contact.</p>
+
+                <p>How it works: Your email or message is your primary tool. It must be clear, concise, and compelling to get a response. Since you're not relying on a public profile, your message must do all the heavy lifting of establishing your credibility and value.</p>
+
+                <h3>3. In-Person and Online Networking (Beyond LinkedIn)</h3>
+                <p>The most powerful connections are often made in person or in smaller, more focused online communities.</p>
+
+                <p><strong>In-Person:</strong> Attend industry conferences, local meetups, and professional association meetings. Bring professional business cards with your personal website URL and contact information.</p>
+
+                <p><strong>Online:</strong> Look for industry-specific forums, Slack or Discord channels, and professional organizations that have their own private communities. These can be even more valuable than a public network because the members are highly targeted and engaged.</p>
+
+                <h3>4. Leveraging Your Existing Network</h3>
+                <p>This is arguably the most effective tool in any job search and it doesn't require a public profile.</p>
+
+                <p>How it works: Systematically reach out to former colleagues, supervisors, and professional contacts. Use your personal narrative to tell them about your pivot and ask for their advice or for an introduction to someone in your target industry. A personal referral is often more valuable than an online application.</p>
+
+                <p>While not having a LinkedIn profile means you'll be less "discoverable" to recruiters and hiring managers who use it as their primary search tool, it forces you to be more deliberate and intentional. It makes your proactive approach the central part of your strategy, which is the most powerful way to make an unconventional career change anyway.</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label">Me:</div>
+            <div class="conversation-content">
+                <p>Yes, LinkedIn certainly is not a requirement. I know young people (in their early 20s) who don't even know what LinkedIn is, and they couldn't care less about opening an account there. Some of them tried it and concluded that this platform isn't for them. They will use other places, like GitHub or Behance and create their portfolio there.</p>
+
+                <p>This is my plan also. I already created my website on GitHub, using html code which Claude AI coded for me in seconds.</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label gemini-label">Gemini:</div>
+            <div class="conversation-content">
+                <p>That's fantastic. You've hit on a key truth about today's professional landscape: the platform is secondary to the portfolio. It's not about being on a specific network; it's about having a place where you can directly showcase your value.</p>
+
+                <p>Your experience with GitHub and Claude AI is a perfect example of this. You've already taken a proactive step to create a professional home that is entirely under your control. This is far more powerful than a standardized LinkedIn profile because it demonstrates your initiative and skills in a tangible way. Your website is a direct, living portfolio of your capabilities.</p>
+
+                <p>Now, with your personal website in place, your proactive pitch becomes even more powerful. You can send your HPSA-formatted message and, instead of a LinkedIn profile, you can provide a link to your own site, which tells your full story and showcases your work exactly how you want it to.</p>
+
+                <p>You have all the right tools to get started. Let's move on to crafting the compelling content for them.</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label">Me:</div>
+            <div class="conversation-content">
+                <p>Right. For my personal narrative, what do we need? Tell me what data do you need in order to help me write the first draft?</p>
+            </div>
+        </div>
+
+        <div class="conversation-entry">
+            <div class="speaker-label gemini-label">Gemini:</div>
+            <div class="conversation-content">
+                <p>To help you write the first draft of your personal narrative, I need the raw material for your story. This isn't about writing a full, polished text yet. Think of it as a brief, detailed outline.</p>
+
+                <p>Please provide me with some information for the three key parts of the story we discussed:</p>
+
+                <h3>The Past: Your Professional Journey So Far</h3>
+                <p>Tell me about your previous career. What were your main roles or responsibilities? More importantly, what were your key transferable skills? Focus on skills that aren't tied to a specific industry, such as problem-solving, project management, communication, or leadership.</p>
+
+                <ul>
+                    <li>What were 2-3 of your most significant accomplishments or projects?</li>
+                    <li>What were you consistently good at or what did you enjoy most about your work?</li>
+                    <li>What unique insights did your time in that field give you?</li>
+                </ul>
+
+                <h3>The Pivot: Your Motivation for Change</h3>
+                <p>This is the "why" behind your decision. What sparked this change?</p>
+
+                <ul>
+                    <li>What was the main reason you decided you wanted a new professional path?</li>
+                    <li>What were the pain points or frustrations with your old work?</li>
+                    <li>What new interests or passions have you discovered that are guiding you now?</li>
+                </ul>
+
+                <h3>The Future: Your Next Chapter</h3>
+                <ul>
+                    <li>What is the new role or industry you are targeting?</li>
+                    <li>What kind of problems do you want to solve in this new field?</li>
+                    <li>What kind of impact do you want to have with your work?</li>
+                    <li>What new skills have you been learning to prepare for this change?</li>
+                </ul>
+
+                <p>Just give me the facts and details in whatever format is easiest for you. The goal is to gather the information, and then we will work together to shape it into a powerful and compelling story.</p>
+
+    <footer class="article-footer fade-in">
+        <p>Thoughts? I'd love to hear from you.</p>
+        <p><a href="mailto:llanieckilpw@gmail.com" style="color: #0066cc; text-decoration: none;">Drop me an email</a></p>
+    </footer>
+                <div class="top-link fade-in">
+        <a href="strategyfirstpartfour.html">↑ Back to top</a>
+    </div>
+
+    <script>
+        // Add staggered animation delays to fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
