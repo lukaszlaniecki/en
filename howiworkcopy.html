@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How I Work - Łukasz Łaniecki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .navigation {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-container a {
+            color: #666;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 400;
+            transition: opacity 0.2s;
+            padding: 5px 0;
+        }
+        
+        .nav-container a:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-container a.active {
+            color: #000;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 600px) {
+            .nav-container {
+                gap: 20px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-container a {
+                font-size: 1.1em;
+                padding: 8px 0;
+            }
+        }
+        
+        .top-link {
+            margin-bottom: 30px;
+        }
+        
+        .top-link a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: opacity 0.2s;
+        }
+        
+        .top-link a:hover {
+            opacity: 0.7;
+        }
+        
+        .header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: left;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .contact-info a:hover {
+            color: #004499;
+            text-decoration: underline;
+        }
+        
+        .content {
+            margin: 0 auto;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+         
+        .page-title {
+            font-size: 1.4em;
+            font-weight: 300;
+            margin-bottom: 5px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            line-height: 1.1;
+        }
+         
+        .lab-title {
+            font-size: 1.4em;
+            font-weight: 150;
+            margin-bottom: 5px;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+         
+        .sublab-title {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .item-number {
+            font-size: 1.1em;
+            color: #999;
+            font-weight: 300;
+            min-width: 30px;
+            flex-shrink: 0;
+        }
+        
+        .item-content h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        .item-content h5 {
+            font-size: 1.3em;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        .item-content .meta {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .item-content p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .item-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .item-content li {
+            color: #555;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .item-content li:before {
+            content: "•";
+            color: #999;
+            position: absolute;
+            left: 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .skill-category h4 {
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skill-category li {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .item {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .item-number {
+                min-width: auto;
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2 class="page-title">Łukasz Łaniecki - Excited for new opportunities</h2>
+    <div class="contact-info">
+            <a href="mailto:llanieckilpw@gmail.com">llanieckilpw@gmail.com</a>
+            <a href="tel:+1234567890">+1 (234) 567-890</a>
+        </div>
+    <nav class="navigation fade-in">
+        <div class="nav-container">
+            <a href="index.html">Introduction</a>
+            <a href="howiwork.html" class="active">How I Work</a>
+            <a href="onmyradar.html">On My Radar</a>
+            <a href="letsconnect.html">Let's Connect</a>
+            <a href="behindthescenes.html">Behind The Scenes</a>
+        </div>
+    </nav>
+
+    <header class="header fade-in">
+        <h2 class="section-title">Real-life scenarios</h2>
+        <div class="subtitle">How I worked across various disciplines</div>
+    </header>
+
+    <main class="content">
+        <section class="section fade-in">
+            <h2 class="lab-title">Operation</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <div class="meta">Multiple companies, projects and initiatives · 2001 - Present</div>
+                    <h3>Relentless improvement is the name of the game</h3>
+                    <ul>
+                        <li>I manically look for and implement better and better ways, solutions and procedures.</li>
+                        <li>I am relentless at using time as efficiently as possible. I use techniques, tools and technology which save a lot of time. I eliminate blockages, switch or drop tasks, when it makes more sense. Being stuck is a choice.</li>
+                        <li>I constantly collect data, learn new things, improve my skills and deepen my knowledge.</li>
+                        <li>I pay a lot of attention to cultural shifts and current trends.</li>
+                        <li>I prefer fast and agile execution, as well as testing assumptions and products in real-life scenarios.</li>
+                    </ul>
+                    <br>
+                    <h4>Real-life example</h4>
+                    <br>
+                    <ul>
+                        <li>LinkedIn Poland Women wouldn't exist were it not for my initial, very different idea. We started working on it in a small team, not knowing that a pivot was around the corner. We pivoted and today LinkedIn Poland Women is among the fastest growing publications for women on LinkedIn, with a remarkable level of community engagement.</li>
+                    </ul>
+                </div>
+            </div>
+            </section>
+
+            <section class="section fade-in">
+            <h2 class="lab-title">Perspective & Paradigm Shift, Problem Solving</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <div class="meta">Multiple companies, projects and initiatives · 2001 - Present</div>
+                    <h3>"Why?", "Why not?", "Why not try?" are my favorite questions</h3>
+                    <ul>
+                        <li>I question all assumptions, which leads to better understanding, fewer mistakes and can save valuable resources.</li>
+                        <li>I question the majority of other people’s and my own ideas, beliefs and thinking. This leads to unconventional and novel solutions.</li>
+                        <li>I look for life hacks, often use certain tools and resources in a different, unexpected ways (adapt them to certain needs when necessary).</li>
+                        <li>I will try certain things which at first glance seem unrealistic or hopeless, because it’s against our initial impulse to try them.</li>
+                        <li>I never allow deals stop the parties from getting an even better outcome. You can always renegotiate a deal, and when you know how to make the situation better, you should do it.</li>
+                        <li>I view laws (made or defined by humans) not as something which mirrors the actual reality. The laws don't tell you what the reality is or will be. They tell you what is expected.</li>
+                    </ul>
+                    <br>
+                    <h4>Real-life example</h4>
+                    <br>
+                    <ul>
+                        <li>I almost completely repurposed a project management app, after I had tested it for a couple of days. Working on projects, we used it almost entirely as our repository for ideas and resources, it was pivotal to our momentum, and everybody on our team loved using this tool.</li>
+                    </ul>
+                </div>
+            </div>
+            </section>
+
+            <section class="section fade-in">
+            <h2 class="lab-title">Management & Leadership</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <div class="meta">Multiple companies, projects and initiatives · 2001 - Present</div>
+                    <h3>I always pay attention to how resouces are used and money is spent</h3>
+                    <ul>
+                        <li>I manically protect all resources - talent, energy, money, time (best allocation, elimination of inefficiencies).</li>
+                        <li>I am meticulous about monitoring and cutting costs, and coming up with cheaper or free solutions and tools.</li>
+                        <li>I always give my best on projects and causes I believe in, and I inspire others to believe and give their best also.</li>
+                    </ul>
+                    <br>
+                    <h4>Real-life example</h4>
+                    <br>
+                    <ul>
+                        <li>My remarkable work ethic, drive, almost infinite energy and positive attitude were central to the develompment of projects in which I was involved (especially in the early stages). LinkedIn Poland Women is the most recent example.</li>
+                    </ul>
+                </div>
+            </div>
+            </section>
+
+            <section class="section fade-in">
+            <h2 class="lab-title">Team Building</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <div class="meta">Multiple companies, projects and initiatives · 2001 - Present</div>
+                    <h3>I build teams with talent, potential, efficiency and culture fit in mind</h3>
+                    <ul>
+                        <li>I look for people who: are driven · have the right kind of energy · show great potential · can both work and think (not merely wait for and follow instructions) · contribute something unique and necessary.</li>
+                        <li>I quickly identify and move on from those who are not a good fit.</li>
+                    </ul>
+                    <br>
+                    <h4>Real-life example</h4>
+                    <br>
+                    <ul>
+                        <li>Working on projects, we had both - examples of a truly fantastic fit, and several close calls. We were able to proceed with speed and confidence thanks to our procedures and excellent communication.</li>
+                    </ul>
+                </div>
+            </div>
+            </section>
+
+            <section class="section fade-in">
+            <h2 class="lab-title">Creativity, Design & Building</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <div class="meta">Multiple companies, projects and initiatives · 2001 - Present</div>
+                    <h3>My radar is always tuned to market opportunities, and then I act upon them</h3>
+                    <ul>
+                        <li>I initiate change by coming up with ideas and then developing and implementing appropriate solutions, procedures and tools.</li>
+                        <li>I always look for low hanging fruits and emergent possibilities, and take advantage of them.</li>
+                        <li>I treat creativity as the most important asset, and I always protect it. I know how it works - when it thrives, and when it dies.</li>
+                    </ul>
+                    <br>
+                    <h4>Real-life example</h4>
+                    <br>
+                <div class="item-content">
+                    <ul>
+                        <li>On my recommendation Discord became our collaboration and communication tool. For our small team working on a small project it was great, and free! We learned how to use it, and soon after I started building servers there. A couple of weeks later the idea for a Discord community for women was born, which then became our LinkedIn-only publication.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="lab-title">Testimonials</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <h3>LinkedIn Poland Women</h3>
+                    <div class="meta">Anna Strumińska 2023 - 2025</div>
+                    <p>...</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-content">
+                    <h3>LinkedIn Poland Women</h3>
+                    <div class="meta">Marcelina Neumann 2024 - 2025</div>
+                    <p>...</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-content">
+                    <h3>Litigation case</h3>
+                    <div class="meta">IS 2010 - 2016</div>
+                    <p>...</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-content">
+                    <h3>Content creation</h3>
+                    <div class="meta">GZ-K 2020 - 2023</div>
+                    <p>...</p>
+                </div>
+            </div>
+            
+            <div class="item">
+                <div class="item-content">
+                    <h3>Legal Market Day</h3>
+                    <div class="meta">JS 2013 - 2014</div>
+                    <p>...</p>
+                </div>
+            </div>
+        </section>
+        
+                <section class="section fade-in">
+            <h2 class="lab-title">Seriously, let's Connect!</h2>
+            
+            <div class="item">
+                <div class="item-content">
+                    <h5>We never know, right? What if there will be some great intersection?</h5>
+                    <br>
+                        <p>I’m always interested in connecting with people and exploring the possibilities of creating value together.</p>
+                        
+                        <p>In any case, whether you want to discuss a project, share insights about an industry, or just grab a coffee, I'd love to hear from you.</p>
+                    
+                    <ul>
+                        <li>Drop me an email (all lowercase) <a href="mailto:llanieckilpw@gmail.com" style="color: #0066cc; text-decoration: none;">llanieckilpw@gmail.com</a></li>
+                        <li>Text or call me <a href="tel:+1234567890" style="color: #0066cc; text-decoration: none;">+1 (234) 567-890</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    <div class="top-link fade-in">
+        <a href="howiwork.html">↑ Back to top</a>
+    </div>
+        
+            <nav class="navigation fade-in">
+        <div class="nav-container">
+            <a href="index.html">Introduction</a>
+            <a href="howiwork.html" class="active">How I Work</a>
+            <a href="onmyradar.html">On My Radar</a>
+            <a href="letsconnect.html">Let's Connect</a>
+            <a href="behindthescenes.html">Behind The Scenes</a>
+        </div>
+    </nav>
+    </main>
+
+    <script>
+        // Add staggered animation delays to fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = (index * 0.1) + 's';
+            });
+        });
+    </script>
+</body>
+</html>
