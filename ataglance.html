@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Łukasz Łaniecki - Creative Problem Solver</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* Consistent Typography */
+        h1, h2 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .subtitle, p {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Section Backgrounds */
+        .hero {
+    background-color: #6f5b3e;
+}
+
+.about {
+    background-color: #f9f6f0;
+    color: #171515; /* Dark text for light background */
+}
+
+.services {
+    background-color: #c4ae78;
+    color: #171515; /* Dark text for light background */
+}
+
+.contact {
+    background-color: #171515;
+        }
+
+        /* Contact specific styles */
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .contact-item a {
+            color: #ffd93d;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .contact-item p {
+            margin-top: 0.5rem;
+            opacity: 0.7;
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #43e97b;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38f9d7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="section hero">
+        <div class="container">
+            <h1 class="fade-in">Creative<br>Problem<br>Solver</h1>
+            <p class="subtitle fade-in">Turning challenges into opportunities through unconventional thinking and strategic execution.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about">
+        <div class="container">
+            <h2 class="fade-in">Former<br>Lawyer<br>Now<br>Innovation<br>Catalyst</h2>
+            <p class="subtitle fade-in">After two decades in law, I pivot careers to solve problems creatively. Co-created LinkedIn Poland Women and Legal Market Day.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services">
+        <div class="container">
+            <h2 class="fade-in">What<br>I<br>Do</h2>
+            <p class="subtitle fade-in">Strategic transformation • Creative problem solving • Team building • Professional reinvention • Paradigm shifting</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact">
+        <div class="container">
+            <h2 class="fade-in">Let's<br>Connect</h2>
+            <p class="subtitle fade-in">Ideas emerge from conversations. Let's explore what we can create together.</p>
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <a href="mailto:llanieckilpw@gmail.com">llanieckilpw@gmail.com</a>
+                    <p>Drop me an email</p>
+                </div>
+                <div class="contact-item fade-in">
+                    <a href="tel:+1234567890">+1 (234) 567-890</a>
+                    <p>Text or call me</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = Math.random() * 0.3 + 's';
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in class
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
